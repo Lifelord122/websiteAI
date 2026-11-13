@@ -27,6 +27,7 @@
         const tileCount = canvas.width / gridSize;
 
         // ===== INITIAL STATE =====
+        let gameOver = false;
         let snake = [
             { x: 10, y: 10 },
             { x: 9, y: 10 },
@@ -96,6 +97,7 @@
             if (head.x < 0 || head.x >= tileCount ||
                 head.y < 0 || head.y >= tileCount ||
                 snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+                gameOver = true;
                 alert("Game Over! Your score: " + score);
                 snake = [
                     { x: 10, y: 10 },
@@ -126,7 +128,9 @@
         drawGame();
 
         setInterval(() => {
+            if (!gameOver) {
             moveSnake();
+            }
             drawGame();
         }, 200);
 
