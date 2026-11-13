@@ -85,7 +85,17 @@
                 y: snake[0].y + direction.y
             };
             snake.unshift(head);
-            snake.pop();
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                document.getElementById("info").innerText =
+                    `Score: ${score}`;
+                food = {
+                    x: Math.floor(Math.random() * tileCount),
+                    y: Math.floor(Math.random() * tileCount)
+                };
+            } else {
+                snake.pop();
+            }
         };
 
         drawGame();
