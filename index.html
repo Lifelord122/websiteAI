@@ -28,6 +28,7 @@
 
         // ===== INITIAL STATE =====
         let gameOver = false;
+        let PAUSE = false;
         let snake = [
             { x: 10, y: 10 },
             { x: 9, y: 10 },
@@ -100,7 +101,10 @@
                         score = 0;
                         document.getElementById("info").innerText =
                             `Score: ${score}`;
-                    }});
+                    }
+                else if (event.code === "Space") {
+                    PAUSE = !PAUSE;
+                }});
 
         const moveSnake = () => {
             const head = {
@@ -133,7 +137,7 @@
         drawGame();
 
         setInterval(() => {
-            if (!gameOver) {
+            if (!gameOver && !PAUSE) {
             moveSnake();
             }
             drawGame();
